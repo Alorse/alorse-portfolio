@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project Name
 
-## Getting Started
+A modern Next.js application with responsive design, theme switching, and accessible components.
 
-First, run the development server:
+## Project Overview
 
+- **Framework**: Next.js App Router
+- **Styling**: Tailwind CSS with custom theme
+- **State Management**: React hooks
+- **Theming**: Next-Themes for dark/light mode
+- **Components**: Radix UI primitives with custom styling
+- **Form Handling**: React Hook Form
+
+## Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/project-name.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies (using pnpm):
+```bash
+pnpm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Create environment configuration:
+```bash
+cp .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Start development server:
+```bash
+pnpm dev
+```
 
-## Learn More
+## Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+The following environment variables are required:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `NEXT_PUBLIC_SITE_URL`: Your site's base URL (e.g. `https://example.com`)
+- `RESEND_API_KEY`: API key for Resend email service
+- `GITHUB_TOKEN`: Personal access token for GitHub API
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Save these in `.env.local` which is excluded from version control.
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push your code to a GitHub repository
+2. Create a new project in Vercel dashboard
+3. Import your GitHub repository
+4. Add environment variables in Vercel project settings
+5. Deploy
+
+Vercel will automatically:
+- Detect Next.js framework
+- Enable optimized builds
+- Set up preview deployments for branches
+- Configure SSL certificates
+
+### Additional Deployment Options
+
+For self-hosting or other platforms, ensure you:
+- Set up proper environment variables
+- Configure build command: `pnpm build`
+- Set start command: `pnpm start`
+
+## Development
+
+### Scripts
+
+- `dev`: Start development server
+- `build`: Create production build
+- `start`: Start production server
+- `lint`: Run ESLint
+
+### Tech Stack Credits
+
+- [Next.js](https://nextjs.org)
+- [React](https://reactjs.org)
+- [Tailwind CSS](https://tailwindcss.com)
+- [Radix UI](https://www.radix-ui.com)
+- [Next-Themes](https://github.com/pacocoursey/next-themes)
