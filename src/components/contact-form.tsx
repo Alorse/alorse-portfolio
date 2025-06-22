@@ -1,42 +1,35 @@
-import * as React from 'react'
-import { Button } from './ui/button'
-import { Input } from './ui/input'
-import { Textarea } from './ui/textarea'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+"use client"
+
 import { useState } from 'react'
-import Link from 'next/link'
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { ContactFormSchema } from "@/lib/schemas"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input" 
+import { Textarea } from "@/components/ui/textarea"
+import type { z } from "zod"
 
-const formSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Valid email is required'),
-  message: z.string().min(10, 'Message must be at least 10 characters')
-})
-
-type FormData = z.infer<typeof formSchema>
+type ContactFormData = z.infer<typeof ContactFormSchema>
 
 export function ContactForm() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submissionResult, setSubmissionResult] = useState<{
-    success: boolean
-    message: string
-  } | null>(null)
-
-  const {
-    register,
+  const { 
+    register, 
     handleSubmit,
     formState: { errors },
     reset
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema)
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(ContactFormSchema)
   })
 
-  const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true)
-    setSubmissionResult(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [submitError, setSubmitError] = useState<string|null>(null)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
 
+  const onSubmit = async (data: ContactFormData) => {
     try {
+      setIsLoading(true)
+      setSubmitError(null)
+      
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -45,116 +38,74 @@ export function ContactForm() {
         body: JSON.stringify(data),
       })
 
-      const result = await response.json()
-      
-      if (response.ok) {
-        setSubmissionResult({
-          success: true,
-          message: 'Message sent successfully!'
-        })
-        reset()
-      } else {
-        setSubmissionResult({
-          success: false,
-          message: result.error || 'Failed to send message'
-        })
+      if (!response.ok) {
+        const result = await response.json()
+        throw new Error(result.error || 'Submission failed')
       }
-    } catch (error) {
-      setSubmissionResult({
-        success: false,
-        message: 'Network error occurred. Please try again.'
-      })
+
+      setSubmitSuccess(true)
+      reset()
+    } catch (err: unknown) {
+      setSubmitError(err instanceof Error ? err.message : 'Submission failed')
     } finally {
-      setIsSubmitting(false)
+      setIsLoading(false)
     }
   }
 
+  if (submitSuccess) {
+    return (
+      <div className="text-center p-6 bg-green-50 rounded-lg">
+        <p className="text-green-600 font-medium">
+          {'Thank you for your message! I\'ll get back to you soon.'}
+        </p>
+      </div>
+    )
+  }
+
   return (
-    <div className="space-y-6">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            Name
-          </label>
-          <Input
-            id="name"
-            {...register('name')}
-            className={`mt-1 ${errors.name ? 'border-red-500' : ''}`}
-            disabled={isSubmitting}
-          />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name.message}</p>
-          )}
-        </div>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <div>
+        <Input
+          {...register('name')}
+          placeholder="Your name"
+          disabled={isLoading}
+        />
+        {errors.name && (
+          <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+        )}
+      </div>
 
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            Email
-          </label>
-          <Input
-            id="email"
-            type="email"
-            {...register('email')}
-            className={`mt-1 ${errors.email ? 'border-red-500' : ''}`}
-            disabled={isSubmitting}
-          />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email.message}</p>
-          )}
-        </div>
+      <div>
+        <Input
+          {...register('email')} 
+          placeholder="Your email"
+          type="email"
+          disabled={isLoading}
+        />
+        {errors.email && (
+          <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+        )}
+      </div>
 
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            Message
-          </label>
-          <Textarea
-            id="message"
-            {...register('message')}
-            className={`mt-1 ${errors.message ? 'border-red-500' : ''}`}
-            rows={5}
-            disabled={isSubmitting}
-          />
-          {errors.message && (
-            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message.message}</p>
-          )}
-        </div>
+      <div>
+        <Textarea
+          {...register('message')}
+          placeholder="Your message"
+          rows={5}
+          disabled={isLoading}
+        />
+        {errors.message && (
+          <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
+        )}
+      </div>
 
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Button
-            type="submit"
-            className="w-full sm:w-auto"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Sending...' : 'Send Message'}
-          </Button>
-          
-          <Button
-            asChild
-            variant="outline"
-            className="w-full sm:w-auto"
-          >
-            <Link
-              href="https://wa.me/573028554080"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Chat on WhatsApp
-            </Link>
-          </Button>
-        </div>
-      </form>
-
-      {submissionResult && (
-        <div
-          className={`p-4 rounded-md ${
-            submissionResult.success
-              ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-              : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
-          }`}
-        >
-          {submissionResult.message}
-        </div>
+      {submitError && (
+        <p className="text-red-500 text-sm">{submitError}</p>
       )}
-    </div>
+
+      <Button type="submit" disabled={isLoading}>
+        {isLoading ? 'Sending...' : 'Send Message'}
+      </Button>
+    </form>
   )
 }

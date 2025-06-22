@@ -1,13 +1,22 @@
 import { NextResponse } from 'next/server'
 
-type GitHubUserStats = {
+interface GitHubRepo {
+  name: string
+  description: string | null
+  stargazers_count: number
+  languages_url: string
+  html_url: string
+}
+
+interface GitHubUserStats {
   totalRepos: number
   totalStars: number
   topRepos: Array<{
     name: string
     description: string
     stars: number
-    language: string
+    languages_url: string
+    html_url: string
   }>
 }
 
@@ -17,41 +26,33 @@ export async function GET() {
       fetch('https://api.github.com/users/alorse', {
         headers: {
           'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'alorse.net'
+          'User-Agent': 'alorse.net'
         }
       }),
       fetch('https://api.github.com/users/alorse/repos?sort=stars&per_page=3', {
         headers: {
           'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'alorse.net'
+          'User-Agent': 'alorse.net'
         }
       })
     ])
 
     if (!userRes.ok || !reposRes.ok) {
-      const errorText = await Promise.all([userRes.text(), reposRes.text()])
-      console.error('GitHub API failed:', {
-        userStatus: userRes.status,
-        userError: errorText[0],
-        reposStatus: reposRes.status,
-        reposError: errorText[1]
-      })
-      throw new Error('GitHub API failed')
+      throw new Error('Failed to fetch GitHub stats')
     }
 
-    const [userData, reposData] = await Promise.all([
-      userRes.json(),
-      reposRes.json()
-    ])
+    const user = await userRes.json()
+    const repos: GitHubRepo[] = await reposRes.json()
 
     const stats: GitHubUserStats = {
-      totalRepos: userData.public_repos,
-      totalStars: reposData.reduce((acc: number, repo: any) => acc + repo.stargazers_count, 0),
-      topRepos: reposData.map((repo: any) => ({
+      totalRepos: user.public_repos,
+      totalStars: repos.reduce((acc, repo) => acc + repo.stargazers_count, 0),
+      topRepos: repos.map(repo => ({
         name: repo.name,
         description: repo.description || '',
         stars: repo.stargazers_count,
-        language: repo.language || ''
+        languages_url: repo.languages_url,
+        html_url: repo.html_url
       }))
     }
 
@@ -62,9 +63,8 @@ export async function GET() {
     })
   } catch (error: unknown) {
     console.error('GitHub stats fetch error:', error)
-    const errorMessage = error instanceof Error ? error.message : 'Failed to fetch GitHub stats'
     return NextResponse.json(
-      { error: errorMessage },
+      { error: error instanceof Error ? error.message : 'Failed to fetch GitHub stats' },
       { status: 500 }
     )
   }
