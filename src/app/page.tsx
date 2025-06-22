@@ -5,16 +5,13 @@ import { AIIntegrations } from "@/components/ai-integrations"
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="row-start-2 w-full max-w-4xl">
+    <div className="flex flex-col min-h-screen">
+      <main className="w-full max-w-screen-md mx-auto px-6 py-8 space-y-16">
         <Hero />
         <AboutSection />
         <AIIntegrations />
         <GitHubHighlights />
       </main>
-      <footer className="row-start-3">
-        {/* Footer content will be added later */}
-      </footer>
     </div>
   )
 }

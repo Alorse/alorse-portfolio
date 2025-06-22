@@ -12,8 +12,9 @@ export function Navbar() {
   }
 
   return (
-    <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-center">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/20 backdrop-blur-lg supports-[backdrop-filter]:bg-background/20">
+      <div className="w-full max-w-screen-md mx-auto px-6 flex h-16 items-center justify-between">
+        <span className="text-lg font-semibold">Alfredo Ortegón</span>
         <Button
           variant="ghost"
           size="icon"

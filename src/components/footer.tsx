@@ -10,7 +10,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border/40 bg-background/95">
-      <div className="container flex flex-col items-center gap-4 py-8 text-center">
+      <div className="w-full max-w-screen-md mx-auto flex flex-col items-center gap-4 py-8 px-6 text-center">
         <div className="flex flex-wrap justify-center gap-4">
           {techStack.map((tech) => (
             <Link
@@ -25,7 +25,8 @@ export function Footer() {
           ))}
         </div>
         <p className="text-sm text-muted-foreground">
-          © 2025 Alfredo Ortegón. All rights reserved.
+          © 2025 Alfredo Ortegón. All rights reserved.<br />
+          Made with ❤️ and 100% AI
         </p>
       </div>
     </footer>
