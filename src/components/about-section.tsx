@@ -3,7 +3,6 @@
 import { motion } from "framer-motion"
 import TechStack from "./tech-stack"
 import { VenturaCard } from "./ventura-card"
-import { AICredits } from "./ai-credits"
 
 export default function AboutSection() {
   return (
@@ -34,7 +33,6 @@ export default function AboutSection() {
         experiences and robust backend architectures.
       </motion.p>
       <TechStack />
-      <AICredits />
       
       <motion.div
         className="mt-8"

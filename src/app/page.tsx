@@ -3,6 +3,7 @@ import AboutSection from "@/components/about-section"
 import GitHubHighlights from "@/components/github-highlights"
 import { AIIntegrations } from "@/components/ai-integrations"
 import { GradientAccent } from "@/components/gradient-accent"
+import { AICredits } from "@/components/ai-credits"
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <AboutSection />
         <AIIntegrations />
         <GitHubHighlights />
+        <AICredits />
         <GradientAccent className="w-full" />
       </main>
     </div>
