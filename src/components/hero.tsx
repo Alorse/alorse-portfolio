@@ -25,12 +25,13 @@ export default function Hero() {
   ]
 
   return (
-    <motion.section 
-      className="flex flex-col md:flex-row items-center gap-8 md:gap-16 w-full"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div className="space-y-4">
+      <motion.section
+        className="flex flex-col md:flex-row items-center gap-8 md:gap-16 w-full"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
       <motion.div 
         className="w-32 h-32 rounded-full overflow-hidden border-4 border-indigo-600 dark:border-indigo-400"
         whileHover={{ scale: 1.05 }}
@@ -83,5 +84,6 @@ export default function Hero() {
         </motion.div>
       </div>
     </motion.section>
+    </div>
   )
 }

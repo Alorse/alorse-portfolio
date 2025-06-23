@@ -20,7 +20,7 @@ module.exports = {
           foreground: "oklch(0.985 0 0)",
         },
         secondary: {
-          DEFAULT: "oklch(0.97 0 0)",
+          DEFAULT: "oklch(0.97 0 0)", 
           foreground: "oklch(0.205 0 0)",
         },
         muted: {
