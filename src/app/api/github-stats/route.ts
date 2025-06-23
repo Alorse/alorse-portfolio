@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server'
 
+export const dynamic = 'force-static'
+export const revalidate = 43200 // 12 hours
+
 interface GitHubRepo {
   name: string
   description: string | null
@@ -21,6 +24,14 @@ interface GitHubUserStats {
 }
 
 export async function GET() {
+  // For static export, return mock data
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return NextResponse.json({
+      totalRepos: 42,
+      totalStars: 1000,
+      topRepos: []
+    })
+  }
   try {
     const [userRes, reposRes] = await Promise.all([
       fetch('https://api.github.com/users/alorse', {
