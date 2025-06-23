@@ -2,12 +2,14 @@
 import { motion } from 'framer-motion'
 import GithubCalendar from 'react-github-calendar'
 import { useEffect, useState } from 'react'
+import { useTheme } from 'next-themes'
 import { Skeleton } from './ui/skeleton'
 
 export default function GitHubHighlights() {
   const [stats, setStats] = useState<GitHubUserStats | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const { theme } = useTheme()
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -59,7 +61,7 @@ export default function GitHubHighlights() {
         </h2>
         <GithubCalendar 
           username="alorse"
-          colorScheme="dark"
+          colorScheme={theme === "dark" ? "dark" : theme === "light" ? "light" : undefined}
         />
       </div>
 

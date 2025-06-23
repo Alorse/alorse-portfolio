@@ -1,55 +1,55 @@
 "use client"
 
 import { motion } from "framer-motion"
+import {
+  SiTypescript,
+  SiNodedotjs,
+  SiReact,
+  SiNextdotjs,
+  SiPython,
+  SiLinux,
+  SiApple,
+  SiGoland,
+  SiAndroid,
+} from "react-icons/si"
 
-const technologies = [
-  { name: "JavaScript", color: "#F7DF1E", icon: "JS" },
-  { name: "TypeScript", color: "#3178C6", icon: "TS" },
-  { name: "Node.js", color: "#339933", icon: "Node" },
-  { name: "React", color: "#61DAFB", icon: "React" },
-  { name: "Next.js", color: "#000000", icon: "Next" },
-  { name: "Python", color: "#3776AB", icon: "Py" },
-  { name: "AI APIs", color: "#10B981", icon: "AI" },
-  { name: "Linux", color: "#FCC624", icon: "Linux" },
-  { name: "macOS", color: "#000000", icon: "Mac" }
+const techStack = [
+  { name: "Go", icon: SiGoland, color: "#F7DF1E" },
+  { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+  { name: "Android", icon: SiAndroid, color: "#2496ED" },
+  { name: "Python", icon: SiPython, color: "#3776AB" },
+  { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
+  { name: "React", icon: SiReact, color: "#61DAFB" },
+  { name: "Next.js", icon: SiNextdotjs, color: "#000000" },
+  { name: "Linux", icon: SiLinux, color: "#FCC624" },
+  { name: "macOS", icon: SiApple, color: "#000000" },
 ]
 
 export default function TechStack() {
   return (
-    <div className="flex flex-wrap gap-2 justify-center">
-      {technologies.map((tech, index) => (
-        <motion.div
-          key={tech.name}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            delay: 0.1 * index,
-            duration: 0.3
-          }}
-          className="flex items-center gap-2 px-3 py-1 rounded-full border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-        >
-          <svg 
-            width="16" 
-            height="16" 
-            viewBox="0 0 24 24" 
-            className="text-gray-500 group-hover:[tech.color] transition-colors"
-            fill="currentColor"
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold">Tech Stack</h3>
+      <div className="flex flex-wrap gap-3">
+        {techStack.map((tech, index) => (
+          <motion.div
+            key={tech.name}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            className="group relative"
           >
-            <text 
-              x="12" 
-              y="16" 
-              textAnchor="middle" 
-              fontSize="12"
-              className="font-mono font-bold"
-            >
-              {tech.icon}
-            </text>
-          </svg>
-          <span className="text-sm text-gray-700 dark:text-gray-300">
-            {tech.name}
-          </span>
-        </motion.div>
-      ))}
+            <div className="flex items-center space-x-2 rounded-lg border bg-card px-3 py-2 text-sm font-medium text-muted-foreground transition-all duration-200 hover:border-primary hover:text-primary">
+              <tech.icon className="h-4 w-4 transition-colors duration-200 group-hover:text-[color:var(--hover-color)]" />
+              <span>{tech.name}</span>
+            </div>
+            <style jsx>{`
+              .group:hover .group-hover\\:text-\\[color\\:var\\(--hover-color\\)\\] {
+                --hover-color: ${tech.color};
+              }
+            `}</style>
+          </motion.div>
+        ))}
+      </div>
     </div>
   )
-}
+} 
