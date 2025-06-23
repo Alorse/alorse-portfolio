@@ -7,20 +7,14 @@ interface GitHubRepo {
   name: string
   description: string | null
   stargazers_count: number
-  languages_url: string
+  language: string
   html_url: string
 }
 
 interface GitHubUserStats {
   totalRepos: number
   totalStars: number
-  topRepos: Array<{
-    name: string
-    description: string
-    stars: number
-    languages_url: string
-    html_url: string
-  }>
+  topRepos: GitHubRepo[]
 }
 
 export async function GET() {
@@ -40,7 +34,7 @@ export async function GET() {
           'User-Agent': 'alorse.net'
         }
       }),
-      fetch('https://api.github.com/users/alorse/repos?sort=stars&per_page=3', {
+      fetch('https://api.github.com/users/alorse/repos?sort=updated&per_page=20', {
         headers: {
           'Accept': 'application/vnd.github.v3+json',
           'User-Agent': 'alorse.net'
@@ -55,14 +49,17 @@ export async function GET() {
     const user = await userRes.json()
     const repos: GitHubRepo[] = await reposRes.json()
 
+    // Sort repos by stars desc and take top 3
+    const sortedRepos = [...repos].sort((a, b) => b.stargazers_count - a.stargazers_count).slice(0, 3);
+    
     const stats: GitHubUserStats = {
       totalRepos: user.public_repos,
       totalStars: repos.reduce((acc, repo) => acc + repo.stargazers_count, 0),
-      topRepos: repos.map(repo => ({
+      topRepos: sortedRepos.map(repo => ({
         name: repo.name,
-        description: repo.description || '',
-        stars: repo.stargazers_count,
-        languages_url: repo.languages_url,
+        description: repo.description,
+        stargazers_count: repo.stargazers_count,
+        language: repo.language,
         html_url: repo.html_url
       }))
     }
