@@ -1,84 +1,76 @@
-# Project Name
+# Alfredo Ortegón's Portfolio
 
-A modern Next.js application with responsive design, theme switching, and accessible components.
+## 🌟 About This Project
 
-## Project Overview
+A modern, responsive portfolio website showcasing my work as an AI-driven Full-Stack Engineer and Freelance Consultant. The site highlights my technical skills, projects, and professional experience.
 
-- **Framework**: Next.js App Router
-- **Styling**: Tailwind CSS with custom theme
-- **State Management**: React hooks
-- **Theming**: Next-Themes for dark/light mode
-- **Components**: Radix UI primitives with custom styling
-- **Form Handling**: React Hook Form
+## 🚀 Key Features
 
-## Installation
+- **Modern UI**: Clean design with dark/light mode support
+- **GitHub Integration**: Shows my coding activity and top repositories
+- **AI-Powered**: Built with AI assistance
+- **Responsive**: Works perfectly on all device sizes
+- **Fast Performance**: Optimized with Next.js and Turbopack
+
+## 🛠 Technologies Used
+
+### Core Stack
+- Next.js 15 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS
+- Framer Motion (animations)
+- shadcn/ui components
+
+### Notable Integrations
+- GitHub API (for stats and repos)
+- Next Themes (dark mode)
+- React Icons
+- react-github-calendar
+
+## ⚡ Getting Started
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/project-name.git
+git clone https://github.com/Alorse/alorse-portfolio.git
 ```
 
-2. Install dependencies (using pnpm):
+2. Install dependencies:
 ```bash
 pnpm install
 ```
 
-3. Create environment configuration:
-```bash
-cp .env.example .env.local
-```
-
-4. Start development server:
+3. Run development server:
 ```bash
 pnpm dev
 ```
 
-## Environment Variables
+## 🎨 Design Highlights
 
-The following environment variables are required:
+- **Gradient Accents**: Inspired by Turbopack's branding
+- **Motion Design**: Smooth animations throughout
+- **Responsive Layout**: Adapts to any screen size
+- **Dark/Light Mode**: Automatic system preference detection
 
-- `NEXT_PUBLIC_SITE_URL`: Your site's base URL (e.g. `https://example.com`)
-- `RESEND_API_KEY`: API key for Resend email service
-- `GITHUB_TOKEN`: Personal access token for GitHub API
+## 🤖 AI Credits
 
-Save these in `.env.local` which is excluded from version control.
+This project was built with AI assistance in various aspects:
+- Developer: AI Assistant
+- Designer: AI Artist  
+- Copywriter: AI Wordsmith
+- Prompt Engineer: [Alfredo Ortegón](https://github.com/alorse)
 
-## Deployment
+## 🌎 Live Demo
 
-### Vercel
+The site is deployed on Vercel:
+[https://www.alorse.net](https://www.alorse.net)
 
-1. Push your code to a GitHub repository
-2. Create a new project in Vercel dashboard
-3. Import your GitHub repository
-4. Add environment variables in Vercel project settings
-5. Deploy
+## 📬 Contact
 
-Vercel will automatically:
-- Detect Next.js framework
-- Enable optimized builds
-- Set up preview deployments for branches
-- Configure SSL certificates
+Feel free to reach out:
+- LinkedIn: [Alfredo Ortegón](https://linkedin.com/in/alorse) 
+- Twitter: [@fredoorse](https://x.com/fredoorse)
 
-### Additional Deployment Options
+---
 
-For self-hosting or other platforms, ensure you:
-- Set up proper environment variables
-- Configure build command: `pnpm build`
-- Set start command: `pnpm start`
-
-## Development
-
-### Scripts
-
-- `dev`: Start development server
-- `build`: Create production build
-- `start`: Start production server
-- `lint`: Run ESLint
-
-### Tech Stack Credits
-
-- [Next.js](https://nextjs.org)
-- [React](https://reactjs.org)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Radix UI](https://www.radix-ui.com)
-- [Next-Themes](https://github.com/pacocoursey/next-themes)
+⭐ If you find this project interesting, please consider starring it on GitHub!
