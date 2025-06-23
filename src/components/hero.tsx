@@ -43,7 +43,7 @@ export default function Hero() {
         transition={{ type: "spring", stiffness: 400, damping: 10 }}
       >
         <Image
-          src="https://alorse.net/fredo_picture.jpeg"
+          src="/fredo_picture.jpeg"
           alt="Alfredo Ortegón"
           width={128}
           height={128}
