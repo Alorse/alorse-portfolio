@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import TechStack from "./tech-stack"
+import { VenturaCard } from "./ventura-card"
 
 export default function AboutSection() {
   return (
@@ -32,6 +33,15 @@ export default function AboutSection() {
         experiences and robust backend architectures.
       </motion.p>
       <TechStack />
+      
+      <motion.div
+        className="mt-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.7, duration: 0.5 }}
+      >
+        <VenturaCard />
+      </motion.div>
     </motion.section>
   )
 }
