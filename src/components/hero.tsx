@@ -74,8 +74,8 @@ export default function Hero() {
           AI-driven Full-Stack Engineer & Freelance Consultant
         </motion.p>
 
-        <motion.div 
-          className="flex gap-4 justify-center md:justify-start"
+        <motion.div
+          className="flex flex-wrap gap-2 justify-center md:justify-start"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
@@ -86,7 +86,7 @@ export default function Hero() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white rounded-lg transition-colors duration-200 flex items-center gap-2"
+              className="px-3 py-1.5 md:px-4 md:py-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white rounded-lg transition-colors duration-200 flex items-center gap-1 md:gap-2 text-sm"
             >
               {link.icon === "github" && (
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
