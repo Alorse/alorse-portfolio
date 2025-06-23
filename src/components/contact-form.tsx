@@ -56,7 +56,7 @@ export function ContactForm() {
     return (
       <div className="text-center p-6 bg-green-50 rounded-lg">
         <p className="text-green-600 font-medium">
-          {'Thank you for your message! I\'ll get back to you soon.'}
+          {'Thank you for your message! I&lsquo;ll get back to you soon.'}
         </p>
       </div>
     )
