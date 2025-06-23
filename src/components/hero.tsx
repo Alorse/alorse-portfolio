@@ -23,11 +23,6 @@ export default function Hero() {
       icon: "linkedin"
     },
     {
-      href: "https://x.com/fredoorse",
-      label: "X",
-      icon: "x"
-    },
-    {
       href: "mailto:alorse@gmail.com",
       label: "Email",
       icon: "mail"
