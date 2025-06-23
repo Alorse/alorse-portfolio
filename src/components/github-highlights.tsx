@@ -59,10 +59,13 @@ export default function GitHubHighlights() {
         <h2 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
           GitHub Activity
         </h2>
-        <GithubCalendar 
-          username="alorse"
-          colorScheme={theme === "dark" ? "dark" : theme === "light" ? "light" : undefined}
-        />
+        <div className="flex justify-center">
+          <GithubCalendar 
+            username="alorse"
+            blockSize={9}
+            colorScheme={theme === "dark" ? "dark" : theme === "light" ? "light" : undefined}
+          />
+        </div>
       </div>
 
       <div className="flex gap-4 text-gray-700 dark:text-gray-300">

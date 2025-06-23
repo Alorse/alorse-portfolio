@@ -23,7 +23,7 @@ export function VenturaCard() {
       </div>
 
       <p className="text-gray-600 dark:text-gray-300 mb-4">
-        Proud member of Ventura Travel&lsquo;s IT team, a leading corporate travel company recognized for its outstanding workplace culture.
+        Proud member of Ventura Travel's engineering team, a leading corporate travel company recognized for its outstanding workplace culture.
       </p>
 
       <Link
